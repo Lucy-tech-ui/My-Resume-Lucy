@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lucy Henrietta Kawa - Interactive CV Dashboard</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    @keyframes fillBar {
+      from { width: 0; }
+      to { width: var(--skill-level); }
+    }
+    .skill-bar { animation: fillBar 1.5s ease-out forwards; }
+    body { font-size: 14px; color: #1f2937; }
+    p, li, span, a { color: inherit; }
+    .summary-text { font-size: 0.75rem; line-height: 1.5; color: #374151; }
+    .skill-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.4;
+      margin: 2px;
+    }
+    .badge-blue { background-color: #2563eb; }
+    .badge-purple { background-color: #7c3aed; }
+    .badge-green { background-color: #059669; }
+    .badge-teal { background-color: #0d9488; }
+    .badge-orange { background-color: #ea580c; }
+    .badge-pink { background-color: #db2777; }
+    .date-pill {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      background-color: #dbeafe;
+      color: #1d4ed8;
+      padding: 1px 8px;
+      border-radius: 9999px;
+      white-space: nowrap;
+    }
+    .section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1d4ed8;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 4px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+    }
+    .section-title i { margin-right: 6px; font-size: 0.875rem; }
+    .exp-title { font-weight: 700; color: #2563eb; font-size: 0.75rem; }
+    .exp-org { font-size: 0.75rem; font-weight: 500; color: #1f2937; }
+    .exp-list { padding-left: 1rem; margin-top: 4px; }
+    .exp-list li { font-size: 0.72rem; line-height: 1.45; color: #374151; margin-bottom: 2px; }
+    .check-item { display: flex; align-items: flex-start; margin-bottom: 2px; }
+    .check-item i { color: #3b82f6; margin-top: 3px; margin-right: 5px; font-size: 0.65rem; flex-shrink: 0; }
+    .check-item span { font-size: 0.75rem; color: #374151; }
+    .edu-degree { font-weight: 700; color: #2563eb; font-size: 0.75rem; }
+    .edu-school { font-size: 0.75rem; color: #374151; }
+    .edu-date { font-size: 0.7rem; color: #6b7280; }
+    .sub-heading { font-weight: 700; color: #2563eb; font-size: 0.75rem; margin-bottom: 4px; display: flex; align-items: center; }
+    .sub-heading i { margin-right: 5px; font-size: 0.7rem; }
+
+    @media print {
+      .bg-blue-700 { background-color: #1d4ed8 !important; print-color-adjust: exact; }
+      .bg-blue-800 { background-color: #1e40af !important; print-color-adjust: exact; }
+      .text-white { color: white !important; print-color-adjust: exact; }
+      .badge-blue, .badge-purple, .badge-green, .badge-teal, .badge-orange, .badge-pink { print-color-adjust: exact; }
+      .shadow-lg, .shadow-md, .shadow-sm { box-shadow: none !important; }
+      @page { margin: 0.5cm; }
+      .page-break { page-break-before: always; }
+    }
+    @media (max-width: 768px) {
+      .resp-grid { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <div class="container mx-auto" style="max-width:210mm; padding:8px;">
+
+    <!-- Header -->
+    <div class="bg-blue-700 text-white shadow-lg" style="padding:14px 16px; border-radius:8px 8px 0 0;">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <div>
+          <h1 style="font-size:1.5rem; font-weight:700; color:#fff; margin:0;">Lucy Henrietta Kawa</h1>
+          <p style="color:#bfdbfe; margin-top:4px; font-size:0.875rem;">Software Engineer | Graphic Designer | Data Analyst | ICT4D Consultant</p>
+        </div>
+        <div style="text-align:right; font-size:0.8rem;">
+          <p style="color:#bfdbfe; display:flex; align-items:center; justify-content:flex-end; gap:4px; margin:2px 0;">
+            <i class="fas fa-map-marker-alt" style="font-size:0.7rem;"></i> Cassava Farm, Tree Planting, Freetown
+          </p>
+          <p style="display:flex; align-items:center; justify-content:flex-end; gap:4px; margin:2px 0;">
+            <i class="fas fa-envelope" style="font-size:0.7rem; color:#bfdbfe;"></i>
+            <span style="color:#bfdbfe;">kawasonwavestudio&#64;gmail&#46;com</span>
+          </p>
+          <p style="display:flex; align-items:center; justify-content:flex-end; gap:4px; margin:2px 0;">
+            <i class="fas fa-phone" style="font-size:0.7rem; color:#bfdbfe;"></i>
+            <span style="color:#bfdbfe;">+232 78 635230</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Grid -->
+    <div class="resp-grid" style="display:grid; grid-template-columns:1fr 2fr; gap:8px; margin-top:8px;">
+
+      <!-- LEFT COLUMN -->
+      <div>
+
+        <!-- Professional Summary -->
+        <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition" style="padding:12px; margin-bottom:8px;">
+          <h2 class="section-title"><i class="fas fa-user-tie"></i> Professional Summary</h2>
+          <p class="summary-text">
+            A versatile Software Engineer, Graphic Designer, and Data Analyst with expertise in application design, digital data collection, programming, animation, and real-time data visualization. Experienced across governmental and non-governmental organizations, with proven skills in software development, system analysis, ICT4D consulting, and capacity building. Self-motivated and committed to driving digital transformation, humanitarian initiatives, and national development through innovative technology-driven solutions.
+          </p>
+        </div>
+
+        <!-- Education -->
+        <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition" style="padding:12px; margin-bottom:8px;">
+          <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
+          <div style="display:flex; align-items:flex-start; margin-bottom:8px;">
+            <i class="fas fa-university" style="color:#2563eb; margin-right:6px; margin-top:2px; font-size:0.7rem;"></i>
+            <div>
+              <p class="edu-degree">BSc (Hons) Software Engineering with Multimedia</p>
+              <p class="edu-school">Limkokwing University of Creative Technology, Sierra Leone</p>
+              <p class="edu-date">2016 — 2022</p>
+            </div>
+          </div>
+          <div style="display:flex; align-items:flex-start; margin-bottom:8px;">
+            <i class="fas fa-school" style="color:#2563eb; margin-right:6px; margin-top:2px; font-size:0.7rem;"></i>
+            <div>
+              <p class="edu-degree">WASSCE</p>
+              <p class="edu-school">St. Joseph's Secondary School, Freetown</p>
+              <p class="edu-date">2008 — 2011</p>
+            </div>
+          </div>
+          <div style="display:flex; align-items:flex-start;">
+            <i class="fas fa-school" style="color:#2563eb; margin-right:6px; margin-top:2px; font-size:0.7rem;"></i>
+            <div>
+              <p class="edu-degree">BECE</p>
+              <p class="edu-school">Zenith International Academy, Bo</p>
+              <p class="edu-date">2006 — 2008</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Training -->
+        <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition" style="padding:12px; margin-bottom:8px;">
+          <h2 class="section-title"><i class="fas fa-certificate"></i> Training & Certifications</h2>
+          <div class="check-item"><i class="fas fa-award" style="color:#2563eb;"></i><span>ICT Talent Development Program — Ministry of Communication, Huawei & Orange SL (May–Jul 2024)</span></div>
+          <div class="check-item"><i class="fas fa-award" style="color:#2563eb;"></i><span>CRS Digitalized ITN Mass Campaign — Device Management, RedRose Collect & ONEapp (Aug 2023–Mar 2024)</span></div>
+        </div>
+
+        <!-- Volunteer & Leadership -->
+        <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition" style="padding:12px; margin-bottom:8px;">
+          <h2 class="section-title"><i class="fas fa-hands-helping"></i> Volunteer & Leadership Roles</h2>
+          <div class="check-item"><i class="fas fa-star" style="color:#2563eb;"></i><span>Graphic Designer/Data Analyst — Informatics Consultancy Firm (2023–2024)</span></div>
+          <div class="check-item"><i class="fas fa-star" style="color:#2563eb;"></i><span>Graphic Designer/Data Analyst — Geomont Company Ltd (Mid 2024)</span></div>
+          <div class="check-item"><i class="fas fa-star" style="color:#2563eb;"></i><span>Sub Consultant/Data Entry — Mott MacDonald (Jan 2018–Mar 2019)</span></div>
+          <div class="check-item"><i class="fas fa-star" style="color:#2563eb;"></i><span>Telecom Intern/Tech Assistant — Africell (2020–2022)</span></div>
+          <div class="check-item"><i class="fas fa-star" style="color:#2563eb;"></i><span>Data Officer, Disease Surveillance — Ministry of Health (COVID-19 Response, 2019)</span></div>
+          <div class="check-item"><i class="fas fa-star" style="color:#2563eb;"></i><span>Student Faculty President & Class Rep — Limkokwing University</span></div>
+        </div>
+
+        <!-- Research Interests -->
+        <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition" style="padding:12px;">
+          <h2 class="section-title"><i class="fas fa-flask"></i> Research Interests</h2>
+          <div style="display:flex; flex-wrap:wrap;">
+            <span class="skill-badge badge-blue">Software Engineering Methodologies</span>
+            <span class="skill-badge badge-blue">Cloud Computing</span>
+            <span class="skill-badge badge-blue">AI & Machine Learning</span>
+            <span class="skill-badge badge-blue">Cybersecurity & Data Privacy</span>
+            <span class="skill-badge badge-blue">Big Data Analytics</span>
+            <span class="skill-badge badge-blue">ICT for Development</span>
+            <span class="skill-badge badge-blue">Human-Computer Interaction</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div>
+
+        <!-- Technical Skills -->
+        <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition" style="padding:12px; margin-bottom:8px;">
+          <h2 class="section-title"><i class="fas fa-laptop-code"></i> Technical Skills</h2>
+
+          <div style="margin-bottom:8px;">
+            <h3 class="sub-heading"><i class="fas fa-code"></i> Software Development & Programming</h3>
+            <div style="display:flex; flex-wrap:wrap;">
+              <span class="skill-badge badge-blue">Application Design (Proficient)</span>
+              <span class="skill-badge badge-blue">System Analysis (Proficient)</span>
+              <span class="skill-badge badge-blue">Software Installation & Troubleshooting</span>
+              <span class="skill-badge badge-blue">SQL (Proficient)</span>
+              <span class="skill-badge badge-blue">R Programming (Intermediate)</span>
+            </div>
+          </div>
+
+          <div style="margin-bottom:8px;">
+            <h3 class="sub-heading"><i class="fas fa-paint-brush"></i> Graphic Design & Animation</h3>
+            <div style="display:flex; flex-wrap:wrap;">
+              <span class="skill-badge badge-pink">Adobe Photoshop (Proficient)</span>
+              <span class="skill-badge badge-pink">Adobe Illustrator (Proficient)</span>
+              <span class="skill-badge badge-pink">CorelDRAW (Proficient)</span>
+              <span class="skill-badge badge-pink">Adobe Animate CC</span>
+              <span class="skill-badge badge-pink">Adobe InDesign</span>
+              <span class="skill-badge badge-pink">Adobe Premiere Pro</span>
+              <span class="skill-badge badge-pink">3D Max</span>
+              <span class="skill-badge badge-pink">Cinema 4D</span>
+              <span class="skill-badge badge-pink">Multimedia Design</span>
+            </div>
+          </div>
+
+          <div style="margin-bottom:8px;">
+            <h3 class="sub-heading"><i class="fas fa-chart-bar"></i> Data Analysis & Visualization</h3>
+            <div style="display:flex; flex-wrap:wrap;">
+              <span class="skill-badge badge-green">Power BI (Proficient)</span>
+              <span class="skill-badge badge-green">Excel (Proficient)</span>
+              <span class="skill-badge badge-green">Data Warehousing</span>
+              <span class="skill-badge badge-green">Database Management</span>
+              <span class="skill-badge badge-green">Data Entry & Processing</span>
+              <span class="skill-badge badge-green">Real-Time Data Visualization</span>
+            </div>
+          </div>
+
+          <div style="margin-bottom:8px;">
+            <h3 class="sub-heading"><i class="fas fa-mobile-alt"></i> Data Collection & ICT4D Tools</h3>
+            <div style="display:flex; flex-wrap:wrap;">
+              <span class="skill-badge badge-teal">RedRose Platform (Proficient)</span>
+              <span class="skill-badge badge-teal">ONEapp Platform</span>
+              <span class="skill-badge badge-teal">ICF Collect</span>
+              <span class="skill-badge badge-teal">Device Management & Configuration</span>
+              <span class="skill-badge badge-teal">Digital Attendance Tracking</span>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="sub-heading"><i class="fas fa-network-wired"></i> Networking, Security & Project Management</h3>
+            <div style="display:flex; flex-wrap:wrap;">
+              <span class="skill-badge badge-purple">LAN/WAN Configuration (Proficient)</span>
+              <span class="skill-badge badge-purple">Network Security</span>
+              <span class="skill-badge badge-purple">Cybersecurity Implementation</span>
+              <span class="skill-badge badge-purple">ICT Training & Facilitation</span>
+              <span class="skill-badge badge-purple">Strategic Planning</span>
+              <span class="skill-badge badge-purple">Digital Transformation</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Professional Experience - Top roles -->
+        <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition" style="padding:12px;">
+          <h2 class="section-title"><i class="fas fa-briefcase"></i> Professional Experience</h2>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+
+            <!-- Software Engineer ICF -->
+            <div>
+              <div style="border-left:2px solid #3b82f6; padding-left:8px; padding-top:4px; padding-bottom:4px;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                  <span class="exp-title">Software Engineer</span>
+                  <span class="date-pill">2023 - Present</span>
+                </div>
+                <p class="exp-org">Informatics Consultancy Firm (ICF) - Sierra Leone</p>
+                <ul class="exp-list list-disc">
+                  <li>Designed and developed software applications supporting health information systems, data collection platforms, and digital transformation initiatives.</li>
+                  <li>Provided system analysis, application testing, and technical troubleshooting to ensure reliable software operations across projects.</li>
+                  <li>Collaborated with cross-functional teams to deliver technology-driven solutions for malaria control programmes and public health campaigns.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- ICF ICT4D -->
+            <div>
+              <div style="border-left:2px solid #3b82f6; padding-left:8px; padding-top:4px; padding-bottom:4px;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                  <span class="exp-title">ICT4D Consultant – School-Based ITN Distribution</span>
+                  <span class="date-pill">Jun 2025 - Aug 2025</span>
+                </div>
+                <p class="exp-org">Informatics Consultancy Firm (ICF) - Sierra Leone</p>
+                <ul class="exp-list list-disc">
+                  <li>Provided technical support including application development, device configuration, and Tier 1 troubleshooting for ICF Collect across Bo and Bombali districts.</li>
+                  <li>Led staff training sessions on digital data collection tools, enhancing digital literacy across medical practitioners and SQAOs.</li>
+                  <li>Implemented innovative solutions to improve digital operations and promote cybersecurity resilience for implementing partners.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Abhajar -->
+            <div>
+              <div style="border-left:2px solid #3b82f6; padding-left:8px; padding-top:4px; padding-bottom:4px;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                  <span class="exp-title">Admin/Technical Assistant</span>
+                  <span class="date-pill">Mar 2025 - Present</span>
+                </div>
+                <p class="exp-org">Abhajar Rice Development Company</p>
+                <ul class="exp-list list-disc">
+                  <li>Prepared monthly reports, managed fund disbursements, and handled loan/grant documentation.</li>
+                  <li>Provided technical support for software applications, operating systems, and hardware devices including setup and troubleshooting.</li>
+                  <li>Managed databases, organized file archives, and coordinated travel arrangements and event planning.</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <!-- Experience Continued -->
+    <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition" style="padding:12px; margin-top:8px;">
+      <h2 class="section-title"><i class="fas fa-briefcase"></i> Professional Experience (continued)</h2>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+
+        <!-- CRS ITN Campaign -->
+        <div>
+          <div style="border-left:2px solid #3b82f6; padding-left:8px; padding-top:4px; padding-bottom:4px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+              <span class="exp-title">ICT4D Consultant – Digitalized ITN Mass Campaign</span>
+              <span class="date-pill">Aug 2023 - Mar 2024</span>
+            </div>
+            <p class="exp-org">Catholic Relief Services (CRS) - Sierra Leone</p>
+            <ul class="exp-list list-disc">
+              <li>Participated in and conducted RedRose Platform training for Sierra Leone's first-ever digitalized ITN Mass Campaign.</li>
+              <li>Led refresher training sessions for ICT4D consultants and assistants on RedRose applications, ensuring effective registration and distribution processes nationwide.</li>
+              <li>Trained zonal and chiefdom supervisors on RedRose Application usage, enhancing their capacity to oversee field operations.</li>
+              <li>Contributed to the official campaign launch and conducted community outreach through the Digital Learning Hub, providing free digital learning services.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Digital Learning Hub -->
+        <div>
+          <div style="border-left:2px solid #3b82f6; padding-left:8px; padding-top:4px; padding-bottom:4px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+              <span class="exp-title">Facilitator / Graphic Designer</span>
+              <span class="date-pill">Mar 2023 - Aug 2023</span>
+            </div>
+            <p class="exp-org">Digital Learning Hub / DSTI - Freetown</p>
+            <ul class="exp-list list-disc">
+              <li>Configured and maintained LANs and WANs, provided technical troubleshooting, and optimized network efficiency to strengthen software operations.</li>
+              <li>Led ICT skills training for university students, community schools, and local residents, enhancing digital literacy and technical capabilities.</li>
+              <li>Prepared reports and monthly analyses; assisted hub users with writing and publishing documents.</li>
+              <li>Supported ICT policy initiatives and contributed to strategic planning for digital transformation projects, bid proposals, and outreach.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Statistics Sierra Leone -->
+        <div>
+          <div style="border-left:2px solid #3b82f6; padding-left:8px; padding-top:4px; padding-bottom:4px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+              <span class="exp-title">Supervisor / Project Field Officer</span>
+              <span class="date-pill">Nov 2021 - Jan 2022</span>
+            </div>
+            <p class="exp-org">Statistics Sierra Leone</p>
+            <ul class="exp-list list-disc">
+              <li>Installed software packages, troubleshot devices, and synced field data directly to HQ servers.</li>
+              <li>Trained field officers on data collection tools, assignment creation, geo-hierarchy mapping, and data syncing to supervisor tablets.</li>
+              <li>Supported data collection operations and sensitized citizens on civic rights and responsibilities.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Key Achievements -->
+        <div>
+          <div style="border-left:2px solid #3b82f6; padding-left:8px; padding-top:4px; padding-bottom:4px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+              <span class="exp-title">Key Achievements Summary</span>
+              <span class="date-pill" style="background-color:#dcfce7; color:#166534;">Career Highlights</span>
+            </div>
+            <p class="exp-org">Across All Roles</p>
+            <ul class="exp-list list-disc">
+              <li>Contributed to Sierra Leone's first-ever digitalized ITN Mass Campaign, training trainers, supervisors, and field staff across multiple regions.</li>
+              <li>Led ICT capacity building for hundreds of participants including medical practitioners, university students, and community members.</li>
+              <li>Served as Data Officer during the COVID-19 response with the Ministry of Health's Intelligent Disease Surveillance Team.</li>
+              <li>Held Student Faculty President and Class Representative roles, demonstrating strong leadership from an early career stage.</li>
+              <li>Built expertise across a uniquely diverse skill set spanning software engineering, graphic design, data analytics, and ICT4D consulting.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Core Competencies -->
+    <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition" style="padding:12px; margin-top:8px;">
+      <h2 class="section-title"><i class="fas fa-star"></i> Core Competencies</h2>
+      <div style="display:flex; flex-wrap:wrap;">
+        <span class="skill-badge badge-blue">Software Engineering</span>
+        <span class="skill-badge badge-blue">Graphic Design & Animation</span>
+        <span class="skill-badge badge-blue">Data Analysis & Visualization</span>
+        <span class="skill-badge badge-blue">ICT4D Consulting</span>
+        <span class="skill-badge badge-blue">Digital Data Collection</span>
+        <span class="skill-badge badge-blue">Capacity Building & Training</span>
+        <span class="skill-badge badge-blue">Network Administration</span>
+        <span class="skill-badge badge-blue">Cybersecurity</span>
+        <span class="skill-badge badge-blue">Device Management</span>
+        <span class="skill-badge badge-blue">Digital Transformation</span>
+        <span class="skill-badge badge-blue">Community Outreach</span>
+        <span class="skill-badge badge-blue">Project Management</span>
+        <span class="skill-badge badge-blue">Strategic Planning</span>
+        <span class="skill-badge badge-blue">Malaria Prevention Programmes</span>
+      </div>
+    </div>
+
+    <!-- References -->
+    <div class="bg-blue-800 text-white shadow-lg" style="padding:12px; margin-top:8px; border-radius:8px;">
+      <h2 style="font-size:1rem; font-weight:700; margin-bottom:8px; text-align:center; color:#fff;">Referees</h2>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
+        <div style="display:flex; align-items:flex-start;">
+          <i class="fas fa-user-circle" style="color:#93c5fd; font-size:0.75rem; margin-top:2px; margin-right:6px;"></i>
+          <div>
+            <p style="font-weight:700; font-size:0.75rem; color:#fff;">Mr. Aiah James</p>
+            <p style="font-size:0.7rem; color:#bfdbfe;">Lecturer & Year Leader</p>
+            <p style="font-size:0.7rem; color:#bfdbfe;">Limkokwing University of Creative Technology</p>
+            <span style="font-size:0.7rem; color:#bfdbfe;">Aiah&#46;james&#64;limkokwing&#46;edu&#46;sl</span>
+            <p style="font-size:0.7rem; color:#bfdbfe;">+232 77 000225</p>
+          </div>
+        </div>
+        <div style="display:flex; align-items:flex-start;">
+          <i class="fas fa-user-circle" style="color:#93c5fd; font-size:0.75rem; margin-top:2px; margin-right:6px;"></i>
+          <div>
+            <p style="font-weight:700; font-size:0.75rem; color:#fff;">Mr. Alhaji S. Kamara</p>
+            <p style="font-size:0.7rem; color:#bfdbfe;">ICT4D Manager</p>
+            <p style="font-size:0.7rem; color:#bfdbfe;">Catholic Relief Service (CRS)</p>
+            <span style="font-size:0.7rem; color:#bfdbfe;">Alhaji&#46;kamara&#64;crs&#46;org</span>
+            <p style="font-size:0.7rem; color:#bfdbfe;">+232 99 852711</p>
+          </div>
+        </div>
+        <div style="display:flex; align-items:flex-start;">
+          <i class="fas fa-user-circle" style="color:#93c5fd; font-size:0.75rem; margin-top:2px; margin-right:6px;"></i>
+          <div>
+            <p style="font-weight:700; font-size:0.75rem; color:#fff;">Mr. Bernard Sal Williams</p>
+            <p style="font-size:0.7rem; color:#bfdbfe;">Co-Founder & Managing Partner</p>
+            <p style="font-size:0.7rem; color:#bfdbfe;">Big Bang World Inc. / Digital Learning Hub</p>
+            <span style="font-size:0.7rem; color:#bfdbfe;">bernard&#64;bigbangworld&#46;com</span>
+            <p style="font-size:0.7rem; color:#bfdbfe;">+232 78 301919</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
